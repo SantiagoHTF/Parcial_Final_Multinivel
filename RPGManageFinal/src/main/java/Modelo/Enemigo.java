@@ -11,7 +11,22 @@ private double xp;
         this.xp = xp;
     }
     
+public void Atacar(Personaje ejemplo){
+if(!ejemplo.isEstaVivo()){
+    System.out.println(ejemplo.getNombre()+" no se puede atacar porque murió.");
+}else{
+    System.out.println(this.nombre+" ataca ferozmente a "+ejemplo.getNombre());    
+double cantidadano = this.getPuntosAtaque();
+ejemplo.recibirDano(cantidadano);
+}//Despues del ataque.
+if(!ejemplo.isEstaVivo()){
+    System.out.println("Derrotaste a "+ejemplo.getNombre()+" el heroe murió.");
+}else{
+    System.out.println("El heroe "+ejemplo.getNombre()+" Aún sigue en pie.");
+}
+}
 
+    
     public double getXp() {
         return xp;
     }

@@ -41,7 +41,7 @@ this.puntosDefensa = 0;
 this.vida -= danosobrante; 
 }
 //si los puntos de defensa pueden mitigar el daño.
-else if (cantidadano>=this.puntosDefensa){
+else if (cantidadano<=this.puntosDefensa){
 this.puntosDefensa -= cantidadano;
 }
 //verificar vida del personaje y stats.
