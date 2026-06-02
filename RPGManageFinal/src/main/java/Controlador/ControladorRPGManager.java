@@ -7,6 +7,9 @@ import Modelo.Guerrero;
 import Modelo.Mago;
 import Modelo.Personaje;
 import Vista.VistaRPGManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -105,6 +108,8 @@ public class ControladorRPGManager {
   }
  if(heroe.isEstaVivo()){
      System.out.println("\nHas derrotado al ogro!");
+     guardarSupBD(heroe);
+ 
  }else{
      System.out.println("\nEl heroe "+heroe.getNombre()+" ha muerto");
     ListaSup.remove(heroe);
@@ -112,7 +117,51 @@ public class ControladorRPGManager {
   
  }
  
- 
+ private void guardarSupBD(Personaje p) {
+    // Usamos REPLACE INTO para que si repites un ID, actualice sus estadísticas y nivel en la BD
+    String sql = "REPLACE INTO personaje (id, nombre, nivel, vida, vida_maxima, puntos_ataque, puntos_defensa, mana, mana_max, fuerza, precision_ar) "
+               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    try (Connection con = db.Conexion.obtenerConexion(); 
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        
+        // 1. Atributos base compartidos por todos los personajes
+        ps.setInt(1, p.getID());
+        ps.setString(2, p.getNombre());
+        ps.setInt(3, (int) p.getNivel()); // Convertimos a int porque tu columna 'nivel' es INT
+        ps.setDouble(4, p.getVida());
+        ps.setDouble(5, p.getVidaMaxima());
+        ps.setInt(6, p.getPuntosAtaque());
+        ps.setInt(7, p.getPuntosDefensa());
+        
+        // 2. Atributos específicos usando condicionales por clase (Polimorfismo)
+        if (p instanceof Mago) {
+            Mago m = (Mago) p;
+            ps.setDouble(8, m.getMana());     // Asumiendo que tienes un getMana() en tu clase Mago
+            ps.setDouble(9, m.getManaMax());
+            ps.setNull(10, java.sql.Types.DOUBLE); // Fuerza null
+            ps.setNull(11, java.sql.Types.DOUBLE); // Precision null
+        } else if (p instanceof Guerrero) {
+            Guerrero g = (Guerrero) p;
+            ps.setNull(8, java.sql.Types.DOUBLE);  // Mana null
+            ps.setNull(9, java.sql.Types.DOUBLE);  // ManaMax null
+            ps.setDouble(10, g.getFuerza());
+            ps.setNull(11, java.sql.Types.DOUBLE); // Precision null
+        } else if (p instanceof Arquero) {
+            Arquero a = (Arquero) p;
+            ps.setNull(8, java.sql.Types.DOUBLE);  // Mana null
+            ps.setNull(9, java.sql.Types.DOUBLE);  // ManaMax null
+            ps.setNull(10, java.sql.Types.DOUBLE); // Fuerza null
+            ps.setDouble(11, a.getPrecision_ar());   // Tu atributo 'precision' mapea a 'precision_ar'
+        }
+        
+        ps.executeUpdate();
+        System.out.println("\nHeroe guardado en la BD.");
+        
+    } catch (SQLException e) {
+        System.out.println("\nError al guardar en al BD.");
+    }
+}
  
  public void MostrarSup(){
      System.out.println("\n------Heroes que sobrevivieron------\n");
@@ -129,6 +178,7 @@ public class ControladorRPGManager {
          
      }
  }
+ 
  
     }
     

@@ -4,11 +4,11 @@ package Modelo;
 
 public class Arquero extends Personaje {
     
-private double precision;
+private double precision_ar;
 
-    public Arquero(double precision, int ID, String nombre, double nivel, double vida, double vidaMaxima, boolean estaVivo, int puntosAtaque, int puntosDefensa) {
+    public Arquero(double precision_ar, int ID, String nombre, double nivel, double vida, double vidaMaxima, boolean estaVivo, int puntosAtaque, int puntosDefensa) {
         super(ID, nombre, nivel, vida, vidaMaxima, estaVivo, puntosAtaque, puntosDefensa);
-        this.precision = precision;
+        this.precision_ar = precision_ar;
     }
 
 @Override
@@ -18,7 +18,7 @@ if(!ejemplo.isEstaVivo()){
 }else{
     System.out.println(this.nombre+" ataca a "+ejemplo.getNombre()+" con un flechazo."); 
     
-double cantidadano = this.getPuntosAtaque()+(this.getPrecision()*0.20);
+double cantidadano = this.getPuntosAtaque()+(this.getPrecision_ar()*0.20);
 ejemplo.recibirDano(cantidadano);
 }//Despues del ataque.
 if(!ejemplo.isEstaVivo()){
@@ -31,14 +31,35 @@ if(!ejemplo.isEstaVivo()){
                     +"--Defensa restante: "+ejemplo.getPuntosDefensa()+".");
 }
 }
- 
-    public double getPrecision() {
-        return precision;
+
+    public double getPrecision_ar() {
+        return precision_ar;
     }
 
-    public void setPrecision(double precision) {
-        this.precision = precision;
+    public void setPrecision_ar(double precision_ar) {
+        this.precision_ar = precision_ar;
     }
+
+@Override
+    public double getVida() {
+        return vida;
+    }
+
+@Override
+    public void setVida(double vida) {
+        this.vida = vida;
+    }
+
+@Override
+    public int getPuntosDefensa() {
+        return puntosDefensa;
+    }
+
+@Override
+    public void setPuntosDefensa(int puntosDefensa) {
+        this.puntosDefensa = puntosDefensa;
+    }
+ 
 
 @Override
     public String getNombre() {
