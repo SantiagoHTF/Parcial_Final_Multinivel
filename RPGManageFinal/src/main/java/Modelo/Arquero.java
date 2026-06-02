@@ -14,7 +14,7 @@ private double precision;
 @Override
         public void Atacar(Enemigo ejemplo){
 if(!ejemplo.isEstaVivo()){
-    System.out.println(this.nombre+" no se puede atacar porque murió.");
+    System.out.println(ejemplo.getNombre()+" no se puede atacar porque murió.");
 }else{
     System.out.println(this.nombre+" ataca a "+ejemplo.getNombre()+" con un flechazo."); 
     

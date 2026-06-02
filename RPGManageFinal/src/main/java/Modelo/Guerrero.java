@@ -11,7 +11,28 @@ private double fuerza;
         this.fuerza = fuerza;
     }
     
-
+@Override
+        public void Atacar(Enemigo ejemplo){
+if(!ejemplo.isEstaVivo()){
+    System.out.println(ejemplo.nombre+" no se puede atacar porque murió.");
+}else{
+    System.out.println(this.nombre+" ataca a "+ejemplo.getNombre()+" con un espadazo."); 
+    
+double cantidadano = this.getPuntosAtaque()+(this.getFuerza()*0.20);
+ejemplo.recibirDano(cantidadano);
+}//Despues del ataque.
+if(!ejemplo.isEstaVivo()){
+    this.nivel += (0.20*ejemplo.getXp());
+    System.out.println("Derrotaste a "+ejemplo.getNombre()+"ganaste xp: "+ejemplo.getXp()+"\n"
+            + "Nivel actual: "+this.nivel);
+}else{
+        System.out.println("Estado del enemigo "+ejemplo.getNombre()+".\n"
+            + "--Vida restante: "+ejemplo.getVida()+".\n"
+                    +"--Defensa restante: "+ejemplo.getPuntosDefensa()+".");
+}
+}
+    
+    
     public double getFuerza() {
         return fuerza;
     }

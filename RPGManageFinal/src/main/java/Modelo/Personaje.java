@@ -9,7 +9,7 @@ public abstract class Personaje {
  protected String nombre;
  protected double nivel;
  protected double vida;
-  private double vidaMaxima;
+  private  double vidaMaxima;
  protected boolean estaVivo;
   private int puntosAtaque;
  protected int puntosDefensa;

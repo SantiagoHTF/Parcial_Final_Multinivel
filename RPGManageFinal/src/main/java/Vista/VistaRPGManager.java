@@ -16,9 +16,10 @@ public class VistaRPGManager {
         System.out.println(Mensaje);
     }
     
+    
     public int MenuPrincipal(){
         System.out.println("-----RPGManager Menú-----\n"
-                + "1. Iniciar Juego.\n"
+                + "1. Jugar.\n"
                 + "2. Salir\n"
                 + "Opcion: ");   
     return input.nextInt();
@@ -41,5 +42,6 @@ public class VistaRPGManager {
                 + "Opcion: ");
         return input.nextInt();
     }
+    
        
 }

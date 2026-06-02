@@ -19,9 +19,9 @@ public class Mago extends Personaje {
     //metodo atacar
  public void Atacar(Enemigo ejemplo){
 if(!ejemplo.isEstaVivo()){
-    System.out.println(this.nombre+" no se puede atacar porque murió.");
+    System.out.println(ejemplo.getNombre()+" no se puede atacar porque murió.");
 }else if(this.getMana()== 0){
-    System.out.println(this.nombre+" no pudo atacar porque le falta maná.\nAsegurese de recargar el maná.");
+    System.out.println(ejemplo.getNombre()+" no pudo atacar porque le falta maná.\nAsegurese de recargar el maná.");
 }else{
 double cantidadano = this.getPuntosAtaque()+(this.getMana()*0.20);
 ejemplo.recibirDano(cantidadano);

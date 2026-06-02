@@ -1,13 +1,16 @@
 
 package com.mycompany.rpgmanagefinal;
 
-/**
- *
- * @author santi
- */
+import Controlador.ControladorRPGManager;
+import Vista.VistaRPGManager;
+
 public class RPGManageFinal {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+
+        VistaRPGManager vista = new VistaRPGManager();                    
+                
+        ControladorRPGManager controlador = new ControladorRPGManager(vista);  
+        controlador.Jugar();
     }
 }
