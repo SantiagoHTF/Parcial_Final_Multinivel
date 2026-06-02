@@ -6,13 +6,13 @@ import javax.swing.JOptionPane;
 
 public abstract class Personaje {
   private int ID;
-  String nombre;
-  double nivel;
-  private double vida;
+ protected String nombre;
+ protected double nivel;
+ protected double vida;
   private double vidaMaxima;
-  boolean estaVivo;
+ protected boolean estaVivo;
   private int puntosAtaque;
-  private int puntosDefensa;
+ protected int puntosDefensa;
 //constructor
     public Personaje(int ID,String nombre, double nivel, double vida, double vidaMaxima, boolean estaVivo, int puntosAtaque, int puntosDefensa) {
         this.nombre = nombre;
